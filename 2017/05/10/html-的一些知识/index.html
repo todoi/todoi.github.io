@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhgzhg.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="HTML、XML、XHTML有什么区别？  HTML全称是Hyper Text Markup Language（超文本标记语言），是通用的web语言，上手方便，但它语法结构松散、很多地方模糊不清。具有代码不规范与臃肿、数据与表现混杂等问题。 XML全称是Extensible Markup Language(可扩展标记语言)，用于定义其他语言的一种元语言，前身为SGML。它提供了一种基本结构和其它标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="html 的一些知识">
+<meta property="og:url" content="http://zhgzhg.me/2017/05/10/html-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="angan2io">
+<meta property="og:description" content="HTML、XML、XHTML有什么区别？  HTML全称是Hyper Text Markup Language（超文本标记语言），是通用的web语言，上手方便，但它语法结构松散、很多地方模糊不清。具有代码不规范与臃肿、数据与表现混杂等问题。 XML全称是Extensible Markup Language(可扩展标记语言)，用于定义其他语言的一种元语言，前身为SGML。它提供了一种基本结构和其它标">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-05-10T13:17:12.000Z">
+<meta property="article:modified_time" content="2020-11-18T10:24:53.637Z">
+<meta property="article:author" content="微风玉米">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhgzhg.me/2017/05/10/html-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>html 的一些知识 | angan2io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">angan2io</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Day one Day up</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/05/10/html-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          html 的一些知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-10 21:17:12" itemprop="dateCreated datePublished" datetime="2017-05-10T21:17:12+08:00">2017-05-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="HTML、XML、XHTML有什么区别？"><a href="#HTML、XML、XHTML有什么区别？" class="headerlink" title="HTML、XML、XHTML有什么区别？"></a>HTML、XML、XHTML有什么区别？</h4><hr>
+<ol>
+<li><strong>HTML</strong>全称是Hyper Text Markup Language（超文本标记语言），是通用的web语言，上手方便，但它语法结构松散、很多地方模糊不清。具有代码不规范与臃肿、数据与表现混杂等问题。</li>
+<li><strong>XML</strong>全称是Extensible Markup Language(可扩展标记语言)，用于定义其他语言的一种元语言，前身为SGML。它提供了一种基本结构和其它标记语言必须遵守的一组规则。语言结构复杂，语法严谨，上手较困难，后多用于网络数据的转换和描述。</li>
+<li><strong>XHTML</strong>全称是 Extensible Hyper Text Markup Language（可扩展超文本标记语言)，  由XML规则改进而来的HTML，主要内容与HTML相差不大，但语法方面更加严格。</li>
+</ol>
+<h4 id="怎样理解HTML-语义化？"><a href="#怎样理解HTML-语义化？" class="headerlink" title="怎样理解HTML 语义化？"></a>怎样理解HTML 语义化？</h4><hr>
+<ol>
+<li><p>HTML 语义化是什么？<br>HTML中的标签，用以描述内容的含义或意义，即语义。如，我们一看到h1 标签，就明白h1 中包括的内容是一级标题，遇到p 标记标签，就明白标签内的是段落，这些含义不会随着样式的改变而改变。<br>HTML语义化，让HTML 只负责网页的内容，把所有的样式交给CSS。</p>
+</li>
+<li><p>语义化的好处</p>
+<ul>
+<li>去掉或丢失样式时也能呈现清晰的页面结构</li>
+<li>方便其他设备解析，如屏幕阅读器，盲人阅读器和移动设备等  </li>
+<li>对搜索引擎和爬虫更加友好</li>
+<li>便于团队开发和维护</li>
+</ul>
+</li>
+<li><p>应注意的问题—选择合适的标签、使用合理的代码</p>
+<ul>
+<li>尽量少使用无语义<code>&lt;div&gt;</code>和<code>&lt;span&gt;</code></li>
+<li>不要使用纯样式标签，如b、font、u等，改用CSS 设置</li>
+<li>需要强调的文本可以包含在<code>&lt;strong&gt;</code>和<code>&lt;em&gt;</code>标签中</li>
+</ul>
+</li>
+</ol>
+<h4 id="怎样理解内容与样式分离的原则？"><a href="#怎样理解内容与样式分离的原则？" class="headerlink" title="怎样理解内容与样式分离的原则？"></a>怎样理解内容与样式分离的原则？</h4><hr>
+<ul>
+<li>写HTML 时先不管样式，重点放在HTML 语义化和结构上，让HTML 能体现页面结构或者内容，之后再去写样式</li>
+<li>HTML 内不允许出现属性样式，尽量不要出现行内样式，可用类选择器和id 选择器进行控制</li>
+</ul>
+<h4 id="有哪些常见的meta标签？"><a href="#有哪些常见的meta标签？" class="headerlink" title="有哪些常见的meta标签？"></a>有哪些常见的meta标签？</h4><hr>
+<blockquote>
+<p><code>&lt;meta&gt;</code>标签提供关于HTML文档的元数据。元数据不会显示在页面上，但是对于机器是可读的。它可用于浏览器（如何显示内容或重新加载页面），搜索引擎（关键词），或其他 web 服务。 ——<span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24v" title="http://www.w3school.com.cn/">W3School<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>http-equiv</td>
+<td>content-type/expires/refresh/set-cookie/windows-target</td>
+<td>把content属性关联到HTTP头部。</td>
+</tr>
+<tr>
+<td>name</td>
+<td>author/description/keywords/generator/revised/viewport</td>
+<td>把 content 属性关联到一个名称。</td>
+</tr>
+<tr>
+<td>content</td>
+<td>some text</td>
+<td>定义用于翻译 content 属性值的格式。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>content-type</p>
+<figure class="highlight plain"><figcaption><span>http-equiv</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta http-equiv&#x3D;&quot;content-language&quot; content&#x3D;&quot;zh-cn&quot;&gt;&#96;&#96;&#96;</span><br><span class="line">用以说明主页制作所使用的文字和语言</span><br><span class="line">- expires</span><br><span class="line">&#96;&#96;&#96;&lt;meta http-equiv&#x3D;&quot;expires&quot; content&#x3D;&quot;Mon,12 May 2001 00:20:00 GMT&quot;&gt;&#96;&#96;&#96;</span><br><span class="line">用于设定网页的到期时间，一旦过期则必须到服务器上重新调用，注意要使用GMT时间格式</span><br><span class="line">- refresh</span><br><span class="line">&#96;&lt;meta http-equiv&#x3D;&quot;refresh&quot; content&#x3D;&quot;n,url&#x3D;http:&#x2F;&#x2F;yourlink&quot;&gt;&#96;</span><br><span class="line">让网页在指定的时间n内跳转到链接页面</span><br><span class="line">- pragma</span><br><span class="line">&#96;&lt;meta http-equiv&#x3D;&quot;pragma&quot; content&#x3D;&quot;no-cache&quot;&gt;&#96;</span><br><span class="line">用于设定禁止浏览器从本地机的缓存中调阅页面内容，设定后一旦离开网页就无法从Cache中再调出</span><br><span class="line">- set-cookie</span><br><span class="line">&#96;&lt;meta http-equiv&#x3D;&quot;set-cookie&quot; content&#x3D;&quot;Mon,12 May 2001 00:20:00 GMT&quot;&gt;&#96;</span><br><span class="line">用于cookie设定，如果网页过期，存盘的cookie将被删除。需要注意的也是必须使用GMT时间格式</span><br><span class="line">- windows-target</span><br><span class="line">&#96;&lt;meta name&#x3D;&quot;windows-target&quot; content&#x3D;&quot;_top&quot;&gt;&#96;</span><br><span class="line">强制页面在当前窗口中以独立页面显示，可以防止自己的网页被别人当作一个frame页调用</span><br><span class="line">- X-UA-Compatible</span><br><span class="line">&#96;&lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;edge,chrome&#x3D;1&quot;&gt;&#96;</span><br><span class="line">优先使用ie最新版本和chrome</span><br><span class="line">- viewport</span><br><span class="line">&#96;&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width,initial-scale&#x3D;1.0,maximum-scale&#x3D;1.0,user-scalable&#x3D;no&quot;&gt;&#96;</span><br><span class="line">用于优化移动浏览器的显示。如果不是响应式网站，不要使用initial-scale或者禁用缩放。</span><br><span class="line">  1. width：宽度（数值 &#x2F; device-width）（范围从200 到10,000，默认为980 像素）</span><br><span class="line">  2. height：高度（数值 &#x2F; device-height）（范围从223 到10,000）</span><br><span class="line">  3. initial-scale：初始的缩放比例 （范围从&gt;0 到10）</span><br><span class="line">  4. minimum-scale：允许用户缩放到的最小比例</span><br><span class="line">  5. maximum-scale：允许用户缩放到的最大比例</span><br><span class="line">  6. user-scalable：用户是否可以手动缩 (no,yes)</span><br><span class="line">- keywords</span><br><span class="line">&#96;&lt;meta name&#x3D;&quot;keywords&quot; content&#x3D;&quot;your tags&quot;&gt;&#96;</span><br><span class="line">为搜索引擎提供参考，网页内容所包含的核心搜索关键词</span><br><span class="line">- description</span><br><span class="line">&#96;&lt;meta name&#x3D;&quot;description&quot; &gt;&#96;</span><br><span class="line">为搜索引擎提供参考，网页的描述信息;搜索引擎采纳后，作为搜索结果中的页面摘要(snippet)显示</span><br><span class="line">- robots</span><br><span class="line">&#96;&lt;meta name&#x3D;&quot;robots&quot; content&#x3D;&quot;index,nofollow&quot;&gt;&#96;</span><br><span class="line">用于设定搜索引擎检索方式</span><br><span class="line">    1. all：文件将被检索，且页面上的链接可以被查询；</span><br><span class="line">    2. none：文件将不被检索，且页面上的链接不可以被查询；</span><br><span class="line">    3. index：文件将被检索；</span><br><span class="line">    4. follow：页面上的链接可以被查询；</span><br><span class="line">    - noindex：文件将不被检索；</span><br><span class="line">    - nofollow：页面上的链接不可以被查询。</span><br><span class="line"></span><br><span class="line">参考文档</span><br><span class="line">[常用meta整理](https:&#x2F;&#x2F;segmentfault.com&#x2F;a&#x2F;1190000002407912)</span><br><span class="line">[META标签](http:&#x2F;&#x2F;baike.baidu.com&#x2F;view&#x2F;740572.htm)</span><br><span class="line"></span><br><span class="line">#### 文档声明的作用？标准模式与混杂模式指什么？&lt;！doctyte html&gt; 的作用？</span><br><span class="line">1. 文档声明的作用</span><br><span class="line">文档声明即DOCTYPE ，全称为Document type，用来说明在web设计中你用的是什么版本的文档类型，可声明三种 DTD 类型，分别表示严格版本、过渡版本以及基于框架的 HTML 文档。该标签决定了浏览器选择何种协议解析你的文档，位于HTML 文档的第一行。</span><br><span class="line">&gt;参考</span><br><span class="line">[标点符--网页的DOCTYPE声明的作用](https:&#x2F;&#x2F;www.biaodianfu.com&#x2F;doctype.html)</span><br><span class="line">[W3C--DOCTYPE](http:&#x2F;&#x2F;www.w3school.com.cn&#x2F;tags&#x2F;tag_doctype.asp)</span><br><span class="line"></span><br><span class="line">- 标准模式与混杂模式指什么</span><br><span class="line">浏览器解析文档的两种方式</span><br></pre></td></tr></table></figure>
+<p>  标准（非怪异）模式<br>  混杂（怪异）模式</p>
+<pre><code>- 标准模式
+浏览器根据W3C标准呈现页面。
+- 混杂模式
+以兼容模式呈现页面,模拟老式浏览器的行为，防止站点无法工作。这种模式并未严格遵循W3C 标准。DOCTYPE 不存在或者形式不正确会导致页面以混杂模式呈现，这种行为会导致错误或不可预测，应尽量避免。
+
+- 想了解更多内容请查阅以下网站
+  -  [怪异模式（Quirks Mode）对 HTML 页面的影响](https://www.ibm.com/developerworks/cn/web/1310_shatao_quirks/)
+  - [Activating Browser Modes with Doctype](https://hsivonen.fi/doctype/)</code></pre>
+</li>
+<li><p>&lt;！doctyte html&gt; 的作用<br>用于声明这是个HTML 5 文档</p>
+</li>
+</ul>
+<h4 id="浏览器乱码的原因是什么？如何解决？"><a href="#浏览器乱码的原因是什么？如何解决？" class="headerlink" title="浏览器乱码的原因是什么？如何解决？"></a>浏览器乱码的原因是什么？如何解决？</h4><p>造成HTML 网页乱码原因主要是HTML 源代码的编码方式和浏览器解码方式产生冲突导致的。<br>** 解决方式**<br>清楚自己的IDE 是用何种编码方式保存THML 文档的，接着在HTML <code>&lt;head&gt;</code>里面添加<code>&lt;meta charset=&quot;你的编码方式&quot;&gt;</code><br>想了解更多请查阅：<span class="exturl" data-url="aHR0cDovL3J1b3l1LmppcmVuZ3UuY29tL3Bvc3QvJUU1JTg1JUIzJUU0JUJBJThFJUU2JUI1JThGJUU4JUE3JTg4JUU1JTk5JUE4JUU0JUI5JUIxJUU3JUEwJTgx" title="http://ruoyu.jirengu.com/post/%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B9%B1%E7%A0%81">关于浏览器乱码<i class="fa fa-external-link"></i></span></p>
+<h4 id="常见的浏览器有哪些？分别是什么内核？"><a href="#常见的浏览器有哪些？分别是什么内核？" class="headerlink" title="常见的浏览器有哪些？分别是什么内核？"></a>常见的浏览器有哪些？分别是什么内核？</h4><table>
+<thead>
+<tr>
+<th>浏览器</th>
+<th>内核</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IE8-IE9-IE10</td>
+<td>Trident 4.0-Trident 5.0-Trident 6.0</td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td>Gecko</td>
+</tr>
+<tr>
+<td>Safari</td>
+<td>Webkit</td>
+</tr>
+<tr>
+<td>Google Chrome</td>
+<td>Chromium（基于WebKit内核开发的一个分支），Blink（28及往后版本）</td>
+</tr>
+<tr>
+<td>Opera</td>
+<td>Chromium，Blink（15及往后版本）</td>
+</tr>
+<tr>
+<td>猎豹安全</td>
+<td>1.0-4.2版本为Trident+Webkit，4.3版本为Trident+Blink；</td>
+</tr>
+<tr>
+<td>360安全</td>
+<td>1.0-5.0为Trident，6.0为Trident+Webkit，7.0为Trident+Blink；</td>
+</tr>
+<tr>
+<td>360极速</td>
+<td>7.5之前为Trident+Webkit,7.5为Trident+Blink；</td>
+</tr>
+<tr>
+<td>傲游</td>
+<td>1.x、2.x为IE内核，3.x为IE与Webkit双核</td>
+</tr>
+<tr>
+<td>搜狗高速</td>
+<td>1.x为Trident，2.0及以后版本为Trident+Webkit；</td>
+</tr>
+<tr>
+<td>参考：<span class="exturl" data-url="aHR0cDovL3d3dy5zdHVkeW9mbmV0LmNvbS9uZXdzLzYyNS5odG1s" title="http://www.studyofnet.com/news/625.html">学习也休闲–常见的浏览器内核<i class="fa fa-external-link"></i></span></td>
+<td></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/05/08/vim-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" rel="prev" title="vim 基本命令">
+      <i class="fa fa-chevron-left"></i> vim 基本命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/05/13/flex-%E5%B8%83%E5%B1%80/" rel="next" title="flex 布局">
+      flex 布局 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML%E3%80%81XML%E3%80%81XHTML%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">HTML、XML、XHTML有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3HTML-%E8%AF%AD%E4%B9%89%E5%8C%96%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">怎样理解HTML 语义化？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%8E%E6%A0%B7%E7%90%86%E8%A7%A3%E5%86%85%E5%AE%B9%E4%B8%8E%E6%A0%B7%E5%BC%8F%E5%88%86%E7%A6%BB%E7%9A%84%E5%8E%9F%E5%88%99%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">怎样理解内容与样式分离的原则？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84meta%E6%A0%87%E7%AD%BE%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">有哪些常见的meta标签？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B9%B1%E7%A0%81%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">浏览器乱码的原因是什么？如何解决？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%E5%86%85%E6%A0%B8%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">常见的浏览器有哪些？分别是什么内核？</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="微风玉米"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">微风玉米</p>
+  <div class="site-description" itemprop="description">一个来自编程行业的小学僧，还有很多知识需要学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;todoi"><i class="fa fa-fw fa-github"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmJlYXN0Zm9vZGllQDE2My5jb20=" title="E-Mail → mailto:beastfoodie@163.com"><i class="fa fa-fw fa-envelope"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a target="_blank" rel="noopener" href="//weibo.com/angan2io" title="Weibo → &#x2F;&#x2F;weibo.com&#x2F;angan2io"><i class="fa fa-fw fa-weibo"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy8=" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;">Next</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==" title="https:&#x2F;&#x2F;hexo.io&#x2F;">Hexo</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微风玉米</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>

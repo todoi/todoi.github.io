@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhgzhg.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="虽然之前我有整理过一次meta 标签，但是心中对于meta 标签还是一知半解，所以再次对meta 标签进行整理，并对上一次的文章进行修改。而这次整理主要是参考MDN 文档和Lxxyx 对于meta 标签的总结进行的。 概述 HTML &lt;meta&gt; 标签是用于表示元数据信息，它不会显示在用户所看到的页面上，这些信息被用于机器解析，这些机器可以是服务器、搜索引擎、网络爬虫等。 &lt;me">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML 中常用的 meta 元素">
+<meta property="og:url" content="http://zhgzhg.me/2017/05/27/html-meta/index.html">
+<meta property="og:site_name" content="angan2io">
+<meta property="og:description" content="虽然之前我有整理过一次meta 标签，但是心中对于meta 标签还是一知半解，所以再次对meta 标签进行整理，并对上一次的文章进行修改。而这次整理主要是参考MDN 文档和Lxxyx 对于meta 标签的总结进行的。 概述 HTML &lt;meta&gt; 标签是用于表示元数据信息，它不会显示在用户所看到的页面上，这些信息被用于机器解析，这些机器可以是服务器、搜索引擎、网络爬虫等。 &lt;me">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-05-27T14:10:23.000Z">
+<meta property="article:modified_time" content="2020-11-18T10:24:53.633Z">
+<meta property="article:author" content="微风玉米">
+<meta property="article:tag" content="meta">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhgzhg.me/2017/05/27/html-meta/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>HTML 中常用的 meta 元素 | angan2io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">angan2io</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Day one Day up</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/05/27/html-meta/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTML 中常用的 meta 元素
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-27 22:10:23" itemprop="dateCreated datePublished" datetime="2017-05-27T22:10:23+08:00">2017-05-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>虽然之前我有整理过一次meta 标签，但是心中对于meta 标签还是一知半解，所以再次对meta 标签进行整理，并对上一次的文章进行修改。而这次整理主要是参考<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSFRNTC9FbGVtZW50L21ldGE=" title="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta">MDN<i class="fa fa-external-link"></i></span> 文档和<span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAwNDI3OTc5MQ==" title="https://segmentfault.com/a/1190000004279791">Lxxyx 对于meta 标签的总结<i class="fa fa-external-link"></i></span>进行的。</p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>HTML <code>&lt;meta&gt;</code> 标签是用于表示元数据信息，它不会显示在用户所看到的页面上，这些信息被用于机器解析，这些机器可以是服务器、搜索引擎、网络爬虫等。</li>
+<li><code>&lt;meta&gt;</code> 标签是一个空元素，不需要闭合标签。</li>
+<li><code>&lt;meta&gt;</code> 标签在<code>&lt;head&gt;</code> 标签中一般处于顶部位置。</li>
+</ul>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ol>
+<li><p><strong>全局属性</strong></p>
+<p> 所有的全局属性对<code>&lt;meta&gt;</code> 标签适用，只是全局属性<code>name</code> 在<code>&lt;meta&gt;</code> 标签中具有特殊的语义，这个后面会提到。</p>
+</li>
+<li><p><strong>charset 属性</strong></p>
+<p> 这个属性用于声明当前文档所使用的字符编码，一般写在<code>&lt;head&gt;</code> 标签里面的第一行，属性值推荐设置为UTF-8。</p>
+<p> 注意：如果页面没有定义字符编码，某些交叉脚本技术会伤害到浏览网页的用户，比如<span class="exturl" data-url="aHR0cDovL2NvZGUuZ29vZ2xlLmNvbS9wL2RvY3R5cGUtbWlycm9yL3dpa2kvQXJ0aWNsZVV0Zjc=" title="http://code.google.com/p/doctype-mirror/wiki/ArticleUtf7">UTF-7 fallback cross-scripting technique<i class="fa fa-external-link"></i></span> ，所以推荐使用这个属性定义文档的字符编码。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>html<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>content 属性</strong></p>
+<p>这个属性是与<code>http-equiv</code> 或者 <code>name</code> 共同使用的，用于定义<code>http-equiv</code> 或 <code>name</code> 相关属性值的内容。</p>
+</li>
+<li><p><strong>http-equiv 属性</strong></p>
+<p>个人理解，该属性的属性值相当于HTTP 消息头中的name-value 键值对中的name，而content 相当于name-value 键值对中的value，用于修改某些<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSFRUUC9IZWFkZXJz" title="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers">HTTP header<i class="fa fa-external-link"></i></span> 中的数据。该属性的全称为”http-equivalent”。</p>
+<ul>
+<li><p>语法格式：</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;属性值&quot;</span> <span class="attr">content</span>=<span class="string">&quot;http-equiv属性值的内容&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>content-security-policy</p>
+<p> 它允许网页作者定义当前页的<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvSFRUUC9IZWFkZXJzL0NvbnRlbnQtU2VjdXJpdHktUG9saWN5X19ieV9jbnZvaWQ=" title="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy__by_cnvoid">内容策略<i class="fa fa-external-link"></i></span> 内容策略主要指定允许的服务器源和脚本端点,这有助于防止跨站点脚本攻击。</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;content-security-policy&quot;</span> <span class="attr">content</span>=<span class="string">&quot;default-src https:&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>content-type</p>
+<p>该属性用于定义该文档的 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9NSU1F" title="https://developer.mozilla.org/en-US/docs/MIME">MIME type<i class="fa fa-external-link"></i></span> 。因为这是一个HTML 标签，所以许多HTTP <code>content-type</code> 的值写在这里是无效的。而有效的语法是一个字符串<code>&quot;text/html</code> 然后再跟一个<code>;charset=</code>*<code>IANAcharset&quot;</code>* 。如下面的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;content-type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html;charset=utf-8&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>但是这个属性将要被废弃，用<code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> 代替它。</strong></p>
+</li>
+<li><p>refresh</p>
+<ul>
+<li><p>定义多少秒后刷新页面，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;refresh&quot;</span> <span class="attr">content</span>=<span class="string">&quot;5&quot;</span>&gt;</span> <span class="comment">&lt;!-- 5秒后刷新页面 --&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义多少秒后调转到另外一个页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;refresh&quot;</span> <span class="attr">content</span>=<span class="string">&quot;3;url=https://baidu.com&quot;</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!-- 3秒后跳转到百度页面，这个功能可以用于用户登录界面跳转 --&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>X-UA-Compatible</p>
+<p> 用于告知浏览器以何种版本来渲染页面。</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span> </span><br><span class="line"><span class="comment">&lt;!-- 指定IE和Chrome使用最新版本渲染当前页面 --&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>expires</p>
+<p> 该属性用于设置页面的到期时间，过期后网页必须到服务器上重新传输。</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;expires&quot;</span> <span class="attr">content</span>=<span class="string">&quot;Wed Jun 21 2017 15:23:50 GMT+0800&quot;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>set-cookie</p>
+<p> 用于设置网页的cookie。想了解更多请点击<span class="exturl" data-url="aHR0cDovL3d3dy53aWxsbWFzdGVyLmNvbS9saWJyYXJ5L2Nvb2tpZXMvc2V0dGluZy1hLWNvb2tpZS11c2luZy1vbmx5LWh0bWwucGhw" title="http://www.willmaster.com/library/cookies/setting-a-cookie-using-only-html.php">这里<i class="fa fa-external-link"></i></span></p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;set-cookie&quot;</span> <span class="attr">content</span>=<span class="string">&quot;Michael=more%20than; expires=Wed, 21-Jun-2017 15:26:30 GMT; domain=.example.com; path=/; secure;httponly;&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">1. Michael 是某一cookie 名，是必需的，如果没有cookie 值那么后面也是需要加等号和分号</span></span><br><span class="line"><span class="comment">2. more%20than 是cookie 值，是可选的，其中%20 是空格的转义格式。</span></span><br><span class="line"><span class="comment">3. expires 是到期时间，是可选的，格式：&quot;expires=Wdy, DD-Mon-YYYY HH:MM:SS GMT;&quot;</span></span><br><span class="line"><span class="comment">4. domain 是可选的，用于设置能够读取这个cookie 的域名，至少要求有两个句点，比如.example.com </span></span><br><span class="line"><span class="comment">5. path 是可选的，用于设置读取这个cookie 的url path，如果设置了path，那么该路径以及该路径下的    所有文件和目录都可以读取这个cookie。</span></span><br><span class="line"><span class="comment">6. secure; 用于加密链接。</span></span><br><span class="line"><span class="comment">7. httponly; 表示cookie 仅在http 连接是被读取和传输，而非javascript。</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> 注意：这个属性将被废弃，HTTP header set-cookie 代替</p>
+</li>
+</ul>
+</li>
+<li><p><strong>name 属性</strong></p>
+<p> 该属性用于定义文档级别元数据的名称，比如网页的作者、网页的描述、关键字等。如果同一个<code>&lt;meta&gt;</code> 标签中已经设置了 itemprop、http-equiv 或者 charset 其中一个属性，那么就不能再设置name 属性。  </p>
+<ul>
+<li><p>语法格式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;属性值&quot;</span> <span class="attr">content</span>=<span class="string">&quot;name的属性值的具体内容&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>application-name</p>
+<p>用于定义运行在该网页上的应用名称</p>
+</li>
+<li><p>author</p>
+<p>用于定义该文档的作者</p>
+</li>
+<li><p>description</p>
+<p>用于描述该网站简短而有精确的摘要</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;description&quot;</span> <span class="attr">content</span>=<span class="string">&quot;这是一篇介绍HTML meta 标签的文章，文章分为概述和属性。&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>keywords</p>
+<p>和该网站高度相关的关键字</p>
+</li>
+<li><p>generator</p>
+<p>可以是某软件的名称，该软件之前用于生成该网页</p>
+</li>
+<li><p>referrer</p>
+<p>document.referrer是用于获取前一个网页的URL 地址，那么如果从这个页面跳转到下一个页面，这个页面meta 标签中referrer 的值，会影响到下一个页面获取得到前一个页面URL 的地址。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;referrer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;no-referrer&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">no-referrer: 下一个页面获取得到的 referrer 为空字符``</span></span><br><span class="line"><span class="comment">origin: referrer 为文档源地址</span></span><br><span class="line"><span class="comment">no-referrer-when-downgrade: 当(https→https)时发送源地址，当(https→http)发送空字符串</span></span><br><span class="line"><span class="comment">origin-when-crossorigin：当下一个页面是同源网址，那么它的 referrer 就是网址地址</span></span><br><span class="line"><span class="comment">                       （但是会删去参数，比如锚点和查询字符串）；</span></span><br><span class="line"><span class="comment">                       如果下一个网址是不同源的，那么它的 获取得到前一个网页的 URL 为文档源地址。</span></span><br><span class="line"><span class="comment">unsafe-URL: 下一个页面获取的referrer 是full URL</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>creator </p>
+<p>用于定义这个文档的创造者，可以是组织或者机构。如果多于一个，那么就要使用多个meta 标签</p>
+</li>
+<li><p>robots</p>
+<p>用于定义爬虫以怎样的方式检索本页面，用逗号分隔属性值</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;robots&quot;</span> <span class="attr">content</span>=<span class="string">&quot;index,nofollow&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">index: 默认值，让搜索引擎检索到本页面</span></span><br><span class="line"><span class="comment">nodindex： 不让搜索引擎检索到本页面</span></span><br><span class="line"><span class="comment">follow： 默认值，让搜索引擎可以检索本页面上链接</span></span><br><span class="line"><span class="comment">nofollow： 不让搜索引擎检索本页面上链接的页面</span></span><br><span class="line"><span class="comment">none： 相当于 noindex,nofollow</span></span><br><span class="line"><span class="comment">all: 相当于 index,follow</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>viewport</p>
+<p>这个相当常用，用于响应式页面和移动端页面设计。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;initial-scale=1.0,user-scalable=no,width=device-width,maxmum-scale=1.0,minmum-scale=1.0&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">width: 如果是数值，那么视口的宽度等于单位像素乘以数值；如果是`device-width`，那么视口的宽度适应设备屏幕的宽度。</span></span><br><span class="line"><span class="comment">initial-scale：0.0 ~ 10.0，是设备的宽度和视口的大小的比例</span></span><br><span class="line"><span class="comment">maxmum-scale: 0.0 ~ 10.0, 定义网页放大的最大比例，要大于或等于 minmum-scale</span></span><br><span class="line"><span class="comment">minmum-scale: 0.0 ~ 10.0, 用于定义网页缩小的级别，要小于或等于 maxmum-scale</span></span><br><span class="line"><span class="comment">user-scalable: yes or no， 用于定义用户是否能够放大或缩小页面</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在HTML 中我们首先可以用meta 标签用于定义网页的字符编码，然后可以用http-equiv 属性设置HTTP Header 中的一些数据，还可以用name 属性设置搜索引擎检索结果显示的内容以及检索行为。meta 标签能够实现的功能还是挺多的，当然这也导致了知识点比较杂，要一下子记住这么多的点也比较难，所以写这篇博客就是让自己对meta 标签的功能有一个初步的印象，不管什么时候忘记了也好查询。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/meta/" rel="tag"># meta</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/05/27/%E4%BD%BF%E7%94%A8-GitHub-Pages-%E9%A2%84%E8%A7%88%E9%A1%B5%E9%9D%A2/" rel="prev" title="使用 GitHub Pages 预览页面">
+      <i class="fa fa-chevron-left"></i> 使用 GitHub Pages 预览页面
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/06/13/%E5%9C%A8JavaScript%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="next" title="在JavaScript中为什么推荐使用 === 运算符">
+      在JavaScript中为什么推荐使用 === 运算符 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="微风玉米"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">微风玉米</p>
+  <div class="site-description" itemprop="description">一个来自编程行业的小学僧，还有很多知识需要学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;todoi"><i class="fa fa-fw fa-github"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmJlYXN0Zm9vZGllQDE2My5jb20=" title="E-Mail → mailto:beastfoodie@163.com"><i class="fa fa-fw fa-envelope"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a target="_blank" rel="noopener" href="//weibo.com/angan2io" title="Weibo → &#x2F;&#x2F;weibo.com&#x2F;angan2io"><i class="fa fa-fw fa-weibo"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy8=" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;">Next</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==" title="https:&#x2F;&#x2F;hexo.io&#x2F;">Hexo</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微风玉米</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>

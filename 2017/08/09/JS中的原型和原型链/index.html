@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhgzhg.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="JS中的原型和原型链为什么要理解原型和原型链，因为有利于我们理解和实现 JS对象继承。 __proto__ __proto__是什么   When a constructor creates an object, that object implicitly references the constructor’s prototype property for the purpose of res">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中的原型和原型链">
+<meta property="og:url" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html">
+<meta property="og:site_name" content="angan2io">
+<meta property="og:description" content="JS中的原型和原型链为什么要理解原型和原型链，因为有利于我们理解和实现 JS对象继承。 __proto__ __proto__是什么   When a constructor creates an object, that object implicitly references the constructor’s prototype property for the purpose of res">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-f8ff40ec92cab33a.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-7b6b1776a3c444b3.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-4e8d8953fa427ff5.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-8e0ac52afee90ac2.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-d771dcbc82a451ab.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-99e9ef54690fe2f1.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-47c264e952eeeedf.png">
+<meta property="article:published_time" content="2017-08-09T05:58:21.000Z">
+<meta property="article:modified_time" content="2020-11-18T10:24:53.629Z">
+<meta property="article:author" content="微风玉米">
+<meta property="article:tag" content="prototype">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-f8ff40ec92cab33a.png">
+
+<link rel="canonical" href="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JS中的原型和原型链 | angan2io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">angan2io</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Day one Day up</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JS中的原型和原型链
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-09 13:58:21" itemprop="dateCreated datePublished" datetime="2017-08-09T13:58:21+08:00">2017-08-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JS中的原型和原型链"><a href="#JS中的原型和原型链" class="headerlink" title="JS中的原型和原型链"></a>JS中的原型和原型链</h1><p>为什么要理解原型和原型链，因为有利于我们理解和实现 JS对象继承。</p>
+<h3 id="proto"><a href="#proto" class="headerlink" title="__proto__"></a><code>__</code>proto<code>__</code></h3><ul>
+<li><p><code>__proto__</code>是什么 </p>
+<blockquote>
+<p>When a constructor creates an object, that object implicitly references the constructor’s prototype property for the purpose of resolving property references.  ———–<span class="exturl" data-url="aHR0cDovL3d3dy5lY21hLWludGVybmF0aW9uYWwub3JnL2VjbWEtMjYyLzYuMC8jc2VjLXRlcm1zLWFuZC1kZWZpbml0aW9ucy1wcm90b3R5cGU=" title="http://www.ecma-international.org/ecma-262/6.0/#sec-terms-and-definitions-prototype">ES6 文档<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>JS 中创建出来的对象都会有一个隐式引用，它指向的是构造器的<code>prototype</code>。这个隐式引用就是对象内部[[prototype]]，通常情况下我们是无法访问到这个属性的，但是可以通过浏览器实现的 <code>__proto__</code> 属性去访问它，每一个对象都会有一个<code>__proto__</code>属性。虽然可以通过<code>__proto__</code> 访问到[[prototype]]，但是ECMAScript 不建议通过<code>__proto__</code> 去修改内部[[prototype]] 属性，因为这是个影响性能的操作。</p>
+</li>
+<li><p><code>__proto__</code>指向哪里</p>
+<p><code>__proto__</code> 是一个引用而且指向constructor 的<code>prototype</code>。</p>
+</li>
+</ul>
+<img data-src="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-f8ff40ec92cab33a.png" class="" title="zhg" alt="src-http:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;4675284-f8ff40ec92cab33a.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+
+<img data-src="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-7b6b1776a3c444b3.png" class="" title="zhg" alt="src-http:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;4675284-7b6b1776a3c444b3.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+
+<h3 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h3><ul>
+<li><p><strong>prototype 是什么？</strong></p>
+<p>只有函数才会有<code>prototype</code> 属性。当你创建一个函数时，它的<code>prototype</code>会初始化为一个”空对象” (里面含有一个<code>constructor</code>属性，它是不可枚举属性，近似认为”空对象”)，之后就可以往里面增加属性或方法。<code>prototype</code>主要用于存储公用的方法和属性，然后等待实例的<code>__proto__</code> 来指向它。</p>
+<img data-src="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-4e8d8953fa427ff5.png" class="" title="zhg" alt="src-http:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;4675284-4e8d8953fa427ff5.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+
+<img data-src="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-8e0ac52afee90ac2.png" class="" title="zhg" alt="src-http:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;4675284-8e0ac52afee90ac2.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+
+</li>
+</ul>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><ul>
+<li><p><strong>空对象toString() 方法从何而来？</strong></p>
+<img data-src="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-d771dcbc82a451ab.png" class="" title="zhg" alt="src-http:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;4675284-d771dcbc82a451ab.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+
+<p>其实上面的代码，做了下面几件事：</p>
+<blockquote>
+<ol>
+<li>看看 obj 对象本身有没有 toString 属性。没有就走到下一步。</li>
+<li>看看 obj.<code>__</code>proto<code>__</code> 对象有没有 toString 属性，发现 obj.<code>__</code>proto<code>__</code> 有 toString 属性，于是找到了。所以 obj.toString 实际上就是第 2 步中找到的 obj.<code>__</code>proto<code>__</code>.toString。</li>
+</ol>
+<p>——<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yMzA5MDA0MT9yZWZlcj1zdHVkeS1mZQ==" title="https://zhuanlan.zhihu.com/p/23090041?refer=study-fe">知乎专栏：什么是 JS 原型链？<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>由于<code>obj.__proto__</code> === <code>Object.prototype</code> 所以obj 还可以调用<code>Object.prototype</code> 中其它的属性。可是如果obj 调用的属性在<code>Object.prototype</code> 上也没有呢？那么它就会在<code>Object.prototype.__proto__</code> 中寻找，又 <code>Object.prototype.__proto__</code> 等同于 <code>obj.__proto__.__proto__</code>。所以如果在<code>obj.__proto__.__proto__</code> 上也没有找到，他会继续在<code>obj.__proto__.__proto__.__proto__</code> 上寻找，直到他找到属性或者 .<code>__proto__</code> 为null 。</p>
+<p><strong>如<code>obj.__proto__.__proto__. . . . . . </code>这样由.<code>__proto__</code>组成的链条，就是原型链。</strong> 通过原型链，实例可以得到自身没有但原型链上存在的方法或属性。</p>
+<p>其实<code>instanceof</code> 就是利用原型链的特点来工作的。比如判断obj 是否是Object 的实例（<code>obj instanceof Object</code>），相当于判断 <code>obj.__proto__.__proto__. . .</code> 是否等于<code>Object.prototype</code>。</p>
+</li>
+<li><p><strong>原型链的重点</strong></p>
+<p><code>__proto__</code> 和 <code>prototype</code> 之间的相互关系，构成了JS 的原型链。个人认为掌握原型链，必须记住下面三句话：</p>
+<ul>
+<li><strong>某对象的<code>__</code>proto<code>__</code> ===== 它构造函数的prototype</strong></li>
+<li><strong>Object.prototype.<code>__</code>proto<code>__</code> ===== null</strong></li>
+<li><strong>Function.prototype.<code>__</code>proto<code>__</code> ===== Object.prototype</strong></li>
+</ul>
+</li>
+<li><p><strong>Function.prototype 和Obect.prototype</strong></p>
+<p><code>Function</code>是所有函数的原型（<code>Function.prototype</code>除外）。它是对象同时又是函数，所以它有<code>__proto__</code>和<code>prototype</code>属性。利用上面三句话的第一句<code>某对象的</code><strong><code>proto</code></strong><code> ===== 它构造函数的prototype</code>,可以得到:**<code>Function.__proto__</code> === <code>Function.prototype</code>**。而<code>Object</code>、<code>Number</code>、<code>String</code>、<code>Array</code>、<code>Boolean</code> 等构造函数情况同<code>Function</code> 相差不大，所以它们都是继承自<code>Function</code>，它们的<code>__proto__</code> 会等于 <code>Function.prototype</code>。</p>
+<p><strong><code>Function.prototype</code> 继承自哪里？</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="built_in">Function</span>.prototype  <span class="comment">//&quot;function&quot;</span></span><br><span class="line"><span class="built_in">Function</span>.prototype <span class="keyword">instanceof</span> <span class="built_in">Function</span>  <span class="comment">//false</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.prototype  <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<p>由上面可以得到：<code>Function.prototype</code> 是一个没有<code>prototype</code>属性的函数，它不是继承自<code>Function</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype <span class="keyword">instanceof</span> <span class="built_in">Object</span>  <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.__protot__ === <span class="built_in">Object</span>.prototype  <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>得到<code>Function.prototype</code> 是继承自Object 的。</p>
+<p><strong><code>Object.prototype</code>继承自哪里?</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="built_in">Object</span>.prototype  <span class="comment">//&quot;object&quot;</span></span><br><span class="line"><span class="built_in">Object</span>.prototype <span class="keyword">instanceof</span> <span class="built_in">Object</span>  <span class="comment">//false</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.__proto__ === <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<p>得出<code>Object.prototype</code> 是一个对象，但他不是继承自<code>Object</code>对象，也不是继承自null，它是对象继承的最顶端。</p>
+</li>
+<li><p><strong>总结</strong></p>
+<img data-src="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-99e9ef54690fe2f1.png" class="" title="zhg" alt="src-http:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;4675284-99e9ef54690fe2f1.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+</li>
+<li><p><strong>原型图</strong></p>
+<img data-src="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-47c264e952eeeedf.png" class="" title="图片来自网络" alt="src-http:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;4675284-47c264e952eeeedf.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+
+</li>
+</ul>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NyZWVwZXJ5YW5nL2Jsb2cvaXNzdWVzLzk=" title="https://github.com/creeperyang/blog/issues/9">从__proto__和prototype来深入理解JS对象和原型链<i class="fa fa-external-link"></i></span></p>
+<p>2、<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzM0MTgzNzQ2" title="https://www.zhihu.com/question/34183746">js中__proto__和prototype的区别和关系？  —苏墨橘的回答<i class="fa fa-external-link"></i></span></p>
+<p>3、<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yMzA5MDA0MT9yZWZlcj1zdHVkeS1mZQ==" title="https://zhuanlan.zhihu.com/p/23090041?refer=study-fe">什么是 JS 原型链？<i class="fa fa-external-link"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/prototype/" rel="tag"># prototype</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/06/23/Windows%E4%B8%8Bbash%E6%89%BE%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B/" rel="prev" title="Windows下bash找后台进程">
+      <i class="fa fa-chevron-left"></i> Windows下bash找后台进程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/28/%E4%B8%80%E9%94%AE%E6%B8%85%E7%A9%BA%E5%BE%AE%E5%8D%9A/" rel="next" title="一键清空微博">
+      一键清空微博 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="nav-number">1.</span> <span class="nav-text">JS中的原型和原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proto"><span class="nav-number">1.0.1.</span> <span class="nav-text">__proto__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prototype"><span class="nav-number">1.0.2.</span> <span class="nav-text">prototype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="nav-number">1.0.3.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.0.4.</span> <span class="nav-text">链接</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="微风玉米"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">微风玉米</p>
+  <div class="site-description" itemprop="description">一个来自编程行业的小学僧，还有很多知识需要学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;todoi"><i class="fa fa-fw fa-github"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmJlYXN0Zm9vZGllQDE2My5jb20=" title="E-Mail → mailto:beastfoodie@163.com"><i class="fa fa-fw fa-envelope"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a target="_blank" rel="noopener" href="//weibo.com/angan2io" title="Weibo → &#x2F;&#x2F;weibo.com&#x2F;angan2io"><i class="fa fa-fw fa-weibo"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy8=" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;">Next</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==" title="https:&#x2F;&#x2F;hexo.io&#x2F;">Hexo</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微风玉米</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>

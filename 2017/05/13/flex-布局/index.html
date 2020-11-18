@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhgzhg.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="一、flex 之前的布局方法 normal flow  float + clear position relative + absolute display inline-block 负 margin  二、flex 来了———一种新的布局方式 块级布局侧重垂直方向、行内布局侧重水平方向，flex布局是与方向无关的。 flex 布局可以实现空间自动分配、自动对齐（flexible：弹性、灵活）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flex 布局">
+<meta property="og:url" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="angan2io">
+<meta property="og:description" content="一、flex 之前的布局方法 normal flow  float + clear position relative + absolute display inline-block 负 margin  二、flex 来了———一种新的布局方式 块级布局侧重垂直方向、行内布局侧重水平方向，flex布局是与方向无关的。 flex 布局可以实现空间自动分配、自动对齐（flexible：弹性、灵活）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/flexbox.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/590dedf0a63b9.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/590edb4e0a507.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/590edbb4a612b.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/590edf865bfaf.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/590edb4e0a507.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/590ee04940421.png">
+<meta property="og:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/590ee11dd2c75.png">
+<meta property="article:published_time" content="2017-05-13T13:20:00.000Z">
+<meta property="article:modified_time" content="2020-11-18T10:24:53.633Z">
+<meta property="article:author" content="微风玉米">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="flex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/flexbox.png">
+
+<link rel="canonical" href="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>flex 布局 | angan2io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">angan2io</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Day one Day up</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/05/13/flex-%E5%B8%83%E5%B1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          flex 布局
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-13 21:20:00" itemprop="dateCreated datePublished" datetime="2017-05-13T21:20:00+08:00">2017-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、flex-之前的布局方法"><a href="#一、flex-之前的布局方法" class="headerlink" title="一、flex 之前的布局方法"></a>一、flex 之前的布局方法</h3><ul>
+<li>normal flow </li>
+<li>float + clear</li>
+<li>position relative + absolute</li>
+<li>display inline-block</li>
+<li>负 margin</li>
+</ul>
+<h3 id="二、flex-来了———一种新的布局方式"><a href="#二、flex-来了———一种新的布局方式" class="headerlink" title="二、flex 来了———一种新的布局方式"></a>二、flex 来了———一种新的布局方式</h3><ol>
+<li>块级布局侧重垂直方向、行内布局侧重水平方向，flex布局是<strong>与方向无关</strong>的。</li>
+<li>flex 布局可以实现<strong>空间自动分配、自动对齐</strong>（flexible：弹性、灵活）。</li>
+<li>flex 适用于<strong>简单的线性布局</strong>， 更复杂的布局要交到 grid 布局（还没发布）。</li>
+</ol>
+<h3 id="三、基本概念"><a href="#三、基本概念" class="headerlink" title="三、基本概念"></a>三、基本概念</h3><ul>
+<li><p>理解基本概念</p>
+<ul>
+<li><p>Flex 布局(弹性布局)，是一种用于在页面上布置元素的<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtQ04vZG9jcy9XZWIvQ1NTL0xheW91dF9tb2Rl" title="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_mode">布局模式<i class="fa fa-external-link"></i></span>，使得当页面布局必须适应不同的屏幕尺寸和不同的显示设备时，元素可预测地运行。</p>
+</li>
+<li><p>相关词汇</p>
+<p>图中是一个  flex-direction 属性为  row 的弹性容器，意味着其内的弹性项目将根据既定书写模式沿主轴水平排列，其方向为元素的文本流方向，在这个例子里，为从左到右。</p>
+</li>
+</ul>
+<img data-src="/2017/05/13/flex-%E5%B8%83%E5%B1%80/flexbox.png" class="" title="flex axis" alt="src-https:&#x2F;&#x2F;mdn.mozillademos.org&#x2F;files&#x2F;12998&#x2F;flexbox.png">
+
+<ol>
+<li><p>弹性容器(Flex container)</p>
+<p>弹性项目的父元素。通过设置<code>display:flex;</code>或者<code>display:inline-flex;</code>来定义弹性容器。</p>
+</li>
+<li><p>弹性项目(Flex item)</p>
+<p>弹性容器的每个子元素都称为弹性项目。弹性容器直接包含的文本将被包覆成匿名弹性单元。</p>
+</li>
+<li><p>轴(Axis)</p>
+<p>每个弹性框布局包含两个轴。弹性项目沿其依次排列的那根轴称为<strong>主轴(main axis)**。垂直于</strong>主轴<strong>的那根轴称为</strong>侧轴(cross axis)**。</p>
+</li>
+<li><p>方向(Direction)</p>
+<p>弹性容器的<strong>主轴起点(main start)</strong>/<strong>主轴终点(main end)**和</strong>侧轴起点(cross start)**/**侧轴终点(cross end)**描述了弹性项目排布的起点与终点。它们具体取决于弹性容器的主轴与侧轴中，由  writing-mode 确立的方向（从左到右、从右到左，等等）。</p>
+</li>
+<li><p>行(Line)</p>
+<p>根据 flex-wrap 属性，弹性项目可以排布在单个行或者多个行中。此属性控制侧轴的方向和新行排列的方向。</p>
+</li>
+</ol>
+</li>
+<li><p>代码示例</p>
+<p>下述代码使用了 flex 布局，使本来在文档流布局中独占一行的块级元素 div ，变成了两个同处一行之中。</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">例一</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.parent</span>&#123;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">border</span><span class="selector-pseudo">:solid</span> 1<span class="selector-tag">px</span> <span class="selector-tag">red</span>;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">display</span><span class="selector-pseudo">:flex</span>;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">background</span>:<span class="selector-id">#dde</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">border</span><span class="selector-pseudo">:solid</span> 1<span class="selector-tag">px</span> <span class="selector-tag">black</span>;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">height</span><span class="selector-pseudo">:50px</span>;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">width</span><span class="selector-pseudo">:100px</span>;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">background</span>:<span class="selector-id">#ddd</span>;</span></span><br><span class="line"><span class="css">      <span class="selector-tag">margin</span><span class="selector-pseudo">:10px</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child child1&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child child2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>例一结果如下：</p>
+<img data-src="/2017/05/13/flex-%E5%B8%83%E5%B1%80/590dedf0a63b9.png" class="" title="flex output.PNG" alt="src-https:&#x2F;&#x2F;ooo.0o0.ooo&#x2F;2017&#x2F;05&#x2F;06&#x2F;590dedf0a63b9.png">
+
+<h3 id="四、flex-container-的六个属性"><a href="#四、flex-container-的六个属性" class="headerlink" title="四、flex container 的六个属性"></a>四、flex container 的六个属性</h3><p>(flex-direction || flex-wrap || flex-flow || justify-content || align-items || align-content)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">例二</span></span><br><span class="line"><span class="comment">为了便于理解，用代码实践了这六个属性</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">  * &#123;</span><br><span class="line">  margin: 0px;</span><br><span class="line"><span class="css">  <span class="selector-tag">border</span><span class="selector-pseudo">:0px</span>;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">padding</span><span class="selector-pseudo">:0px</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.container</span> &#123;</span></span><br><span class="line">  display: flex;</span><br><span class="line">  border: 1px solid;</span><br><span class="line">  background: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.items</span> &#123;</span></span><br><span class="line">  border: 5px solid;</span><br><span class="line"><span class="css">  <span class="selector-tag">height</span><span class="selector-pseudo">:50px</span>;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">width</span><span class="selector-pseudo">:100px</span>;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">background</span><span class="selector-pseudo">:white</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item1&quot;</span>&gt;</span>div1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item2&quot;</span>&gt;</span>div2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item3&quot;</span>&gt;</span>div3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item4&quot;</span>&gt;</span>div4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item5&quot;</span>&gt;</span>div5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item6&quot;</span>&gt;</span>div6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item7&quot;</span>&gt;</span>div7<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item8&quot;</span>&gt;</span>div8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;items item9&quot;</span>&gt;</span>div9<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>例二页面展示结果：<img data-src="/2017/05/13/flex-%E5%B8%83%E5%B1%80/590edb4e0a507.png" class="" title="display:flex" alt="src-https:&#x2F;&#x2F;ooo.0o0.ooo&#x2F;2017&#x2F;05&#x2F;07&#x2F;590edb4e0a507.png"></p>
+<ul>
+<li><p>flex-direction(方向)</p>
+<p>这个属性表明flex布局与方向无关，它有四个取值：</p>
+<ul>
+<li><p>column</p>
+<p>让元素一列一列的展示。源代码 flex-container 中由上到下排列的元素，在页面中展示为从页面上方开始往下排列。</p>
+<p>在例二中 .container 加上<code>flex-direction:column</code>之后，页面展示效果如下:<img data-src="/2017/05/13/flex-%E5%B8%83%E5%B1%80/590edbb4a612b.png" class="" title="flex-direction:column" alt="src-https:&#x2F;&#x2F;ooo.0o0.ooo&#x2F;2017&#x2F;05&#x2F;07&#x2F;590edbb4a612b.png"></p>
+</li>
+<li><p>column-reverse</p>
+<p>让元素一列一列的展示。源代码 flex-container 中由上到下排列的元素，在页面中展示为从页面下方开始往上排列。</p>
+<p>在例二中 .container 加上<code>flex-direction:column-reverse</code>之后，页面展示效果如下:<img data-src="/2017/05/13/flex-%E5%B8%83%E5%B1%80/590edf865bfaf.png" class="" title="flex-direction:column-reverse" alt="src-https:&#x2F;&#x2F;ooo.0o0.ooo&#x2F;2017&#x2F;05&#x2F;07&#x2F;590edf865bfaf.png"></p>
+</li>
+<li><p>row——默认值</p>
+<p>让元素一行一行的展示。源代码 flex-container 中由上到下排列的元素，在页面中展示为从页面左侧开始往右排列。</p>
+<p>在例二中 .container 加上<code>flex-direction:row</code>之后，页面展示效果如下:<img data-src="/2017/05/13/flex-%E5%B8%83%E5%B1%80/590edb4e0a507.png" class="" title="flex-direction:row" alt="src-https:&#x2F;&#x2F;ooo.0o0.ooo&#x2F;2017&#x2F;05&#x2F;07&#x2F;590edb4e0a507.png"></p>
+</li>
+<li><p>row-reverse</p>
+<p>让元素一行一行的展示。源代码 flex-container 中由上到下排列的元素，在页面中展示为从页面右侧开始往左排列。</p>
+<p>在例二中 .container 加上<code>flex-direction:row-reverse</code>之后，页面展示效果如下:<img data-src="/2017/05/13/flex-%E5%B8%83%E5%B1%80/590ee04940421.png" class="" title="flex-direction:row-reverse" alt="src-https:&#x2F;&#x2F;ooo.0o0.ooo&#x2F;2017&#x2F;05&#x2F;07&#x2F;590ee04940421.png"></p>
+</li>
+</ul>
+</li>
+<li><p>flex-wrap(换行)</p>
+<p>让元素换行，默认值为不换行 nowrap 。</p>
+<p>在例二中 .container 加上<code>flex-wrap:wrap;</code>之后，页面展示效果如下:<img data-src="/2017/05/13/flex-%E5%B8%83%E5%B1%80/590ee11dd2c75.png" class="" title="flex-wrap:wrap" alt="src-https:&#x2F;&#x2F;ooo.0o0.ooo&#x2F;2017&#x2F;05&#x2F;07&#x2F;590ee11dd2c75.png"></p>
+</li>
+<li><p>flex-flow(上面两个的简写)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">flex-flow</span><span class="selector-pseudo">:row</span> <span class="selector-tag">wrap</span>;</span><br><span class="line"><span class="comment">/*相当于下面的css写法*/</span></span><br><span class="line"><span class="selector-tag">flex-direction</span><span class="selector-pseudo">:row</span>;</span><br><span class="line"><span class="selector-tag">flex-wrap</span><span class="selector-pseudo">:wrap</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>justify-content(主轴方向对齐方式)</p>
+<p>flex-container 中 items 主轴的对齐方式，主轴的方向即 flex-direction 的方向，它有五种取值:</p>
+<ul>
+<li><p>space-between</p>
+<p>主轴方向除去元素内容多出来的空间平均分布在两两元素之间。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL2d1d2liLzIvZWRpdD9odG1sLG91dHB1dA==" title="http://js.jirengu.com/guwib/2/edit?html,output">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>space-around</p>
+<p>主轴方向除去元素内容多出来的空间平均分布在每个元素主轴方向的前后。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL2thdmVoLzIvZWRpdD9odG1sLG91dHB1dA==" title="http://js.jirengu.com/kaveh/2/edit?html,output">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>flex-start</p>
+<p>将 flex-container 中的元素挪到主轴的起点。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL2Fub24vcGVuL3hkUFhRdz9lZGl0b3JzPTExMDAjMA==" title="https://codepen.io/anon/pen/xdPXQw?editors=1100#0">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>flex-end</p>
+<p>将 flex-container 中的元素挪到主轴的终点。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL2RlbXUvMS9lZGl0" title="http://js.jirengu.com/demu/1/edit">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>center</p>
+<p>将 flex-container 中的元素挪到主轴的中间。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3dhY29oYXJ1eGUvMy9lZGl0" title="http://js.jirengu.com/wacoharuxe/3/edit">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+</ul>
+</li>
+<li><p>align-items(侧轴对齐方式)</p>
+<p>flex-container 中 items 侧轴的对齐方式，侧轴方向即主轴方向的垂直方向，有五种取值:</p>
+<ul>
+<li><p>stretch——默认值</p>
+<p>表示 flex-container 之中的 items 是可伸展的，所有的 item 都会拥有与侧轴方向最长的 item 同等的长度。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3dhY29oYXJ1eGUvNC9lZGl0" title="http://js.jirengu.com/wacoharuxe/4/edit">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>flex-start</p>
+<p>将 items 挪到侧轴的起点。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3dhY29oYXJ1eGUvNS9lZGl0" title="http://js.jirengu.com/wacoharuxe/5/edit">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>flex-end</p>
+<p>将 items 挪到侧轴的终点。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3dhY29oYXJ1eGUvNi9lZGl0" title="http://js.jirengu.com/wacoharuxe/6/edit">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>center</p>
+<p>将 items 挪到侧轴的中间。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3dhY29oYXJ1eGUvNy9lZGl0" title="http://js.jirengu.com/wacoharuxe/7/edit">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>baseline</p>
+<p>用文字的 baseline 对齐，比较复杂，用的较少。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3dhY29oYXJ1eGUvOC9lZGl0" title="http://js.jirengu.com/wacoharuxe/8/edit">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+</ul>
+</li>
+<li><p>align-content(多行/列内容对齐方式—用的比较少)</p>
+<p><strong>align-content、align-items、justify-content的区别</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>center</th>
+<th>flex-start</th>
+<th>flex-end</th>
+<th>space-between</th>
+<th>spce-around</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>align-content</td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzEvZWRpdA==" title="http://js.jirengu.com/wusot/1/edit">center1<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzQvZWRpdD9odG1sLGNzcyxvdXRwdXQ=" title="http://js.jirengu.com/wusot/4/edit?html,css,output">flex-start1<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzEwL2VkaXQ/aHRtbCxvdXRwdXQ=" title="http://js.jirengu.com/wusot/10/edit?html,output">flex-end1<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzEyL2VkaXQ/aHRtbCxjc3Msb3V0cHV0" title="http://js.jirengu.com/wusot/12/edit?html,css,output">space-between1<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzE0L2VkaXQ/aHRtbCxvdXRwdXQ=" title="http://js.jirengu.com/wusot/14/edit?html,output">spce-around1<i class="fa fa-external-link"></i></span></td>
+</tr>
+<tr>
+<td>align-items</td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3phY295LzIvZWRpdA==" title="http://js.jirengu.com/zacoy/2/edit">center2<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzgvZWRpdA==" title="http://js.jirengu.com/wusot/8/edit">flex-start2<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzExL2VkaXQ/aHRtbCxvdXRwdXQ=" title="http://js.jirengu.com/wusot/11/edit?html,output">flex-end2<i class="fa fa-external-link"></i></span></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>justify-content</td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3dhY29oYXJ1eGUvMTQvZWRpdA==" title="http://js.jirengu.com/wacoharuxe/14/edit">center3<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzcvZWRpdD9odG1sLGNzcyxvdXRwdXQ=" title="http://js.jirengu.com/wusot/7/edit?html,css,output">flex-start3<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzkvZWRpdD9odG1sLG91dHB1dA==" title="http://js.jirengu.com/wusot/9/edit?html,output">flex-end3<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzEzL2VkaXQ/aHRtbCxvdXRwdXQ=" title="http://js.jirengu.com/wusot/13/edit?html,output">space-between3<i class="fa fa-external-link"></i></span></td>
+<td><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzE1L2VkaXQ/aHRtbCxvdXRwdXQ=" title="http://js.jirengu.com/wusot/15/edit?html,output">spce-around3<i class="fa fa-external-link"></i></span></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="五、flex-item-的六个属性"><a href="#五、flex-item-的六个属性" class="headerlink" title="五、flex item 的六个属性"></a>五、flex item 的六个属性</h3><p>(order || flex-grow || flex-shrink || flex-basis)</p>
+<ul>
+<li><p>flex-grow ——增长比例(空间过多时)</p>
+<p>flex-container 的空间减去 items 的空间之后剩余的空间，用 flex-grow 属性分配给 item。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzE2L2VkaXQ/aHRtbCxvdXRwdXQ=" title="http://js.jirengu.com/wusot/16/edit?html,output">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>flex-shrink——收缩比例(空间不够时)</p>
+</li>
+<li><p>flex-basis——默认大小(一般不用)</p>
+</li>
+<li><p>flex——上面三个的缩写</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>:flex</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.items</span><span class="selector-pseudo">:nth-child(1)</span> &#123;</span><br><span class="line">  <span class="attribute">flex</span>:<span class="number">1</span> <span class="number">3</span> <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">用于表示：如果 container 有剩余空间是将剩余空间全部给 item1, 如果 container 的空间不够时将 item1 按3的比例缩小，如果空间刚刚好则设置 item 在主轴方向的长度为 100px</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>order——顺序(代替双飞翼)</p>
+<p>使用 order 可以自定义的安排 items 的顺序 ，使用时要求每个 item 写入order，否则不生效。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzE3L2VkaXQ/aHRtbCxvdXRwdXQ=" title="http://js.jirengu.com/wusot/17/edit?html,output">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>align-self——自身的对齐方式</p>
+<p>使用 align-self 可以自定义某一个 item 的对齐方式，不然对齐方式继承父级元素的对齐方式。</p>
+<p><span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3d1c290LzE4L2VkaXQ/aHRtbCxjc3Msb3V0cHV0" title="http://js.jirengu.com/wusot/18/edit?html,css,output">示例链接<i class="fa fa-external-link"></i></span></p>
+</li>
+</ul>
+<h3 id="六、例子"><a href="#六、例子" class="headerlink" title="六、例子"></a>六、例子</h3><ol>
+<li><p>手机页面布局( topbar + main + tabs )</p>
+</li>
+<li><p>产品列表( ul&gt;li*9 )</p>
+</li>
+<li><p>PC 页面布局</p>
+<p>实现的页面为：<span class="exturl" data-url="aHR0cDovL2pzLmppcmVuZ3UuY29tL3BhdnV4LzMvZWRpdD9odG1sLG91dHB1dA==" title="http://js.jirengu.com/pavux/3/edit?html,output">http://js.jirengu.com/pavux/3/edit?html,output<i class="fa fa-external-link"></i></span></p>
+<p>参考自<span class="exturl" data-url="aHR0cDovL2NvZGVwZW4uaW8vdGVhbS9jc3MtdHJpY2tzL3Blbi9qcXpOWnEvP2VkaXRvcnM9MTEwMA==" title="http://codepen.io/team/css-tricks/pen/jqzNZq/?editors=1100">http://codepen.io/team/css-tricks/pen/jqzNZq/?editors=1100<i class="fa fa-external-link"></i></span></p>
+</li>
+<li><p>完美居中</p>
+</li>
+</ol>
+<h3 id="七、参考"><a href="#七、参考" class="headerlink" title="七、参考"></a>七、参考</h3><p><span class="exturl" data-url="aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9nLzIwMTUvMDcvZmxleC1ncmFtbWFyLmh0bWw=" title="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html">Flex 布局教程：语法篇<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jc3MtdHJpY2tzLmNvbS9zbmlwcGV0cy9jc3MvYS1ndWlkZS10by1mbGV4Ym94Lw==" title="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zY290Y2guaW8vdHV0b3JpYWxzL2EtdmlzdWFsLWd1aWRlLXRvLWNzczMtZmxleGJveC1wcm9wZXJ0aWVz" title="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties">A Visual Guide to CSS3 Flexbox Properties<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cudzNjcGx1cy5jb20vY3NzMy91bmRlcnN0YW5kaW5nLWZsZXhib3gtZXZlcnl0aGluZy15b3UtbmVlZC10by1rbm93Lmh0bWw=" title="https://www.w3cplus.com/css3/understanding-flexbox-everything-you-need-to-know.html">理解Flexbox：你需要知道的一切<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cudzNjcGx1cy5jb20vY3NzMy9mbGV4Ym94LWxheW91dC1hbmQtY2FsY3VsYXRpb24uaHRtbA==" title="https://www.w3cplus.com/css3/flexbox-layout-and-calculation.html">深入理解 flex 布局以及计算<i class="fa fa-external-link"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/flex/" rel="tag"># flex</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/05/10/html-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86/" rel="prev" title="html 的一些知识">
+      <i class="fa fa-chevron-left"></i> html 的一些知识
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/05/18/hover-%E4%BC%AA%E7%B1%BB/" rel="next" title="hover 伪类">
+      hover 伪类 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81flex-%E4%B9%8B%E5%89%8D%E7%9A%84%E5%B8%83%E5%B1%80%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">一、flex 之前的布局方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81flex-%E6%9D%A5%E4%BA%86%E2%80%94%E2%80%94%E2%80%94%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E5%B8%83%E5%B1%80%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">二、flex 来了———一种新的布局方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">三、基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81flex-container-%E7%9A%84%E5%85%AD%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">四、flex container 的六个属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81flex-item-%E7%9A%84%E5%85%AD%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">五、flex item 的六个属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E4%BE%8B%E5%AD%90"><span class="nav-number">6.</span> <span class="nav-text">六、例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%8F%82%E8%80%83"><span class="nav-number">7.</span> <span class="nav-text">七、参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="微风玉米"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">微风玉米</p>
+  <div class="site-description" itemprop="description">一个来自编程行业的小学僧，还有很多知识需要学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;todoi"><i class="fa fa-fw fa-github"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmJlYXN0Zm9vZGllQDE2My5jb20=" title="E-Mail → mailto:beastfoodie@163.com"><i class="fa fa-fw fa-envelope"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a target="_blank" rel="noopener" href="//weibo.com/angan2io" title="Weibo → &#x2F;&#x2F;weibo.com&#x2F;angan2io"><i class="fa fa-fw fa-weibo"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy8=" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;">Next</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==" title="https:&#x2F;&#x2F;hexo.io&#x2F;">Hexo</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微风玉米</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>

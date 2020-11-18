@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhgzhg.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
+  </script>
+
+  <meta name="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+<meta property="og:type" content="website">
+<meta property="og:title" content="angan2io">
+<meta property="og:url" content="http://zhgzhg.me/index.html">
+<meta property="og:site_name" content="angan2io">
+<meta property="og:description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="微风玉米">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhgzhg.me/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>angan2io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">angan2io</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Day one Day up</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2020/10/28/%E4%B8%80%E9%94%AE%E6%B8%85%E7%A9%BA%E5%BE%AE%E5%8D%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/28/%E4%B8%80%E9%94%AE%E6%B8%85%E7%A9%BA%E5%BE%AE%E5%8D%9A/" class="post-title-link" itemprop="url">一键清空微博</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-28 23:06:38" itemprop="dateCreated datePublished" datetime="2020-10-28T23:06:38+08:00">2020-10-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h3><style>
+    @font-face {
+        font-family: "iconfont";
+        src: url('https://at.alicdn.com/t/font_985780_km7mi63cihi.eot?t=1545807318834');
+        src: url('https://at.alicdn.com/t/font_985780_km7mi63cihi.eot?t=1545807318834#iefix') format('embedded-opentype'),
+            url('https://at.alicdn.com/t/font_985780_km7mi63cihi.woff?t=1545807318834') format('woff'),
+            url('https://at.alicdn.com/t/font_985780_km7mi63cihi.ttf?t=1545807318834') format('truetype'),
+            url('https://at.alicdn.com/t/font_985780_km7mi63cihi.svg?t=1545807318834#iconfont') format('svg');
+    }
+    #weibo-clear__link-container {
+        display: inline-block;
+    }
+    #weibo-clear__link-container a{
+        font-weight: bold;
+        padding: 6px 8px;
+        background: #dbd9d9;
+        color: #333;
+        text-decoration: none;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        font-weight: 700;
+    }
+    #weibo-clear__link-container a:hover {
+        cursor: move;
+        text-decoration: none;
+        color: #666;
+    }
+    #weibo-clear__link-container a:active {
+        position: relative;
+        top: 1px;
+    }
+    #weibo-clear__link-container a i {
+        display: inline-block;
+        vertical-align: middle;
+        width: 25px;
+        height: 25px;
+        font-family: "iconfont" !important;
+        content: "&#xe60c;";
+        background-position: 0 -3px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-image: url('data:image/png;base64,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')
+    }
+</style>
+<ul>
+<li><p>步骤1：拖拽按钮到书签栏</p>
+<div>拖拽这个按钮<div id="weibo-clear__link-container" onclick="alert('请将此链接拖拽到书签栏'); return false;"> <span class="exturl" data-url="amF2YXNjcmlwdDohZnVuY3Rpb24oKXtpZigvaHR0cHM/OlwvXC93ZWlib1wuY29tLy50ZXN0KGxvY2F0aW9uLmhyZWYpKWlmKE51bWJlcigkQ09ORklHLmlzbG9naW4pKXRyeXtpZighY29uZmlybSgn56Gu5a6a5riF56m65b6u5Y2aISEhJykpcmV0dXJuO3ZhciBlPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3NjcmlwdCcpO2UudHlwZT0ndGV4dC9qYXZhc2NyaXB0JyxlLnNyYz0nLy9saWIuc2luYWFwcC5jb20vanMvanF1ZXJ5LzIuMC4zL2pxdWVyeS0yLjAuMy5taW4uanMnLGUub25sb2FkPWZ1bmN0aW9uKCl7dmFyIGUsdD0nV19jbGVhci1mZWVkc19fJysobmV3IERhdGUpLmdldFRpbWUoKSxpPScvL3dlaWJvLmNvbS8nK3BhcmVudC4kQ09ORklHLnVpZCsnL3Byb2ZpbGU/cHJvZmlsZV9mdHlwZT0xJmlzX2FsbD0xJmFqYXhwYWdlbGV0PTEmYWpheHBhZ2VsZXRfdjY9MScsbj0nLy93ZWliby5jb20vJytwYXJlbnQuJENPTkZJRy51aWQrJy9wcm9maWxlP3BpZHM9UGxfT2ZmaWNpYWxfTXlQcm9maWxlRmVlZF9fMjAmcHJvZmlsZV9mdHlwZT0xJmlzX2FsbD0xJmFqYXhwYWdlbGV0PTEmYWpheHBhZ2VsZXRfdjY9MSc7ZnVuY3Rpb24gbygpe2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoJCgnPGRpdiBpZD0nK3QrJz48L2Rpdj4nKVswXSl9ZnVuY3Rpb24gYShpLG4peyQuZ2V0KGkpLmRvbmUoZnVuY3Rpb24oaSl7JCgnZGl2IycrdCkubGVuZ3RofHxvKCksJCgnIycrdCkuaHRtbChpKSxlPXNldFRpbWVvdXQoZnVuY3Rpb24oKXtjbGVhclRpbWVvdXQoZSksbigpfSwyZTMpfSkuZmFpbChmdW5jdGlvbihlKXtjb25zb2xlLmxvZyhlKSxhbGVydCgn5riF56m65aSx6LSlIeivt+WIt+aWsOmhtemdouWQjumHjeivlSEnKX0pfW8oKSxhKGksZnVuY3Rpb24gZSgpe3ZhciB0LGk9JCgnW2FjdGlvbi10eXBlPWZlZWRfbGlzdF9pdGVtXScpLG89aS5sZW5ndGgsbD0wLHI9MDtpZigwPT09bylyZXR1cm4gYWxlcnQoJ+a4heepuuW+ruWNmuaIkOWKnyEnKTshZnVuY3Rpb24gYygpe3Q9c2V0VGltZW91dCgoKT0+e2NsZWFyVGltZW91dCh0KTtjb25zdCBmPWlbcl07KGZ1bmN0aW9uKGUpe3JldHVybiAkLmFqYXgoe3VybDonLy93ZWliby5jb20vYWovbWJsb2cvZGVsP2Fqd3ZyPTYnLHR5cGU6J1BPU1QnLGRhdGFUeXBlOidqc29uJyxkYXRhOnttaWQ6ZX19KS5kb25lKGZ1bmN0aW9uKHQpe2lmKCcxMDAwMDAnPT09dC5jb2RlKXt2YXIgaT0kKCdbbWlkPScrZSsnXScpO2kubGVuZ3RoJiZpLmhpZGUoJ3Nsb3cnLGZ1bmN0aW9uKCl7aS5yZW1vdmUoKX0pO3ZhciBuPSQoJCgnLnRiX2NvdW50ZXIgLldfZjE4JylbMl0pLnRleHQoKTtuLS0sJCgkKCcudGJfY291bnRlciAuV19mMTgnKVsyXSkudGV4dChuKX19KX0pKCQoZikuYXR0cignbWlkJykpLmFsd2F5cyhmdW5jdGlvbigpeysrbD09PW8mJmEobixlKX0pLCsrcjxvJiZjKCl9LDFlMyl9KCl9KX0sZS5vbmVycm9yPWZ1bmN0aW9uKGUpe2FsZXJ0KGUpfSxkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSgnaGVhZCcpWzBdLmFwcGVuZENoaWxkKGUpfWNhdGNoKGUpe2FsZXJ0KGUpfWVsc2UgYWxlcnQoJ+ivt+WFiOeZu+W9leW+ruWNmiEnKX0oKTs=" title="javascript:!function(){if(/https?:\/\/weibo\.com/.test(location.href))if(Number($CONFIG.islogin))try{if(!confirm('确定清空微博!!!'))return;var e=document.createElement('script');e.type='text/javascript',e.src='//lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js',e.onload=function(){var e,t='W_clear-feeds__'+(new Date).getTime(),i='//weibo.com/'+parent.$CONFIG.uid+'/profile?profile_ftype=1&is_all=1&ajaxpagelet=1&ajaxpagelet_v6=1',n='//weibo.com/'+parent.$CONFIG.uid+'/profile?pids=Pl_Official_MyProfileFeed__20&profile_ftype=1&is_all=1&ajaxpagelet=1&ajaxpagelet_v6=1';function o(){document.body.appendChild($('<div id='+t+'></div>')[0])}function a(i,n){$.get(i).done(function(i){$('div#'+t).length||o(),$('#'+t).html(i),e=setTimeout(function(){clearTimeout(e),n()},2e3)}).fail(function(e){console.log(e),alert('清空失败!请刷新页面后重试!')})}o(),a(i,function e(){var t,i=$('[action-type=feed_list_item]'),o=i.length,l=0,r=0;if(0===o)return alert('清空微博成功!');!function c(){t=setTimeout(()=>{clearTimeout(t);const f=i[r];(function(e){return $.ajax({url:'//weibo.com/aj/mblog/del?ajwvr=6',type:'POST',dataType:'json',data:{mid:e}}).done(function(t){if('100000'===t.code){var i=$('[mid='+e+']');i.length&&i.hide('slow',function(){i.remove()});var n=$($('.tb_counter .W_f18')[2]).text();n--,$($('.tb_counter .W_f18')[2]).text(n)}})})($(f).attr('mid')).always(function(){++l===o&&a(n,e)}),++r<o&&c()},1e3)}()})},e.onerror=function(e){alert(e)},document.getElementsByTagName('head')[0].appendChild(e)}catch(e){alert(e)}else alert('请先登录微博!')}();">一键清空微博<i class="fa fa-external-link"></i></span>
+</div>到浏览器的书签栏上。</div>
+<p>如图：</p>
+<img data-src="/2020/10/28/%E4%B8%80%E9%94%AE%E6%B8%85%E7%A9%BA%E5%BE%AE%E5%8D%9A/drag.png" class="" title="left">
+</li>
+<li><p>步骤2：打开微博主页并登录<br>进入微博首页，如果微博已经登录的，可以进入步骤3。如果没有登录，需要登录自己的微博账号。</p>
+</li>
+<li><p>步骤3：点击书签栏上的「一键清空微博」</p>
+<img data-src="/2020/10/28/%E4%B8%80%E9%94%AE%E6%B8%85%E7%A9%BA%E5%BE%AE%E5%8D%9A/click.png" class="">
+
+</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><p>如何退出清空操作<br>两种方法都可以退出清空操作：<br>  方法1：刷新页面<br>  方法2：关闭页面</p>
+</li>
+<li><p>找不到书签栏<br>可能是浏览器的设置没有开启，可以先试一下快捷键「Ctrl+Shift+B」, 如果快捷键不生效，百度一下你所用浏览器书签栏开启的方法。</p>
+</li>
+<li><p>源代码地址<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9pL3R0b3kvYmxvYi9tYWluL3dlaWJvL2NsZWFyLWZlZWRzLmpz" title="https://github.com/todoi/ttoy/blob/main/weibo/clear-feeds.js">weibo/clear-feeds<i class="fa fa-external-link"></i></span></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="post-title-link" itemprop="url">JS中的原型和原型链</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-09 13:58:21" itemprop="dateCreated datePublished" datetime="2017-08-09T13:58:21+08:00">2017-08-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JS中的原型和原型链"><a href="#JS中的原型和原型链" class="headerlink" title="JS中的原型和原型链"></a>JS中的原型和原型链</h1><p>为什么要理解原型和原型链，因为有利于我们理解和实现 JS对象继承。</p>
+<h3 id="proto"><a href="#proto" class="headerlink" title="__proto__"></a><code>__</code>proto<code>__</code></h3><ul>
+<li><p><code>__proto__</code>是什么 </p>
+<blockquote>
+<p>When a constructor creates an object, that object implicitly references the constructor’s prototype property for the purpose of resolving property references.  ———–<span class="exturl" data-url="aHR0cDovL3d3dy5lY21hLWludGVybmF0aW9uYWwub3JnL2VjbWEtMjYyLzYuMC8jc2VjLXRlcm1zLWFuZC1kZWZpbml0aW9ucy1wcm90b3R5cGU=" title="http://www.ecma-international.org/ecma-262/6.0/#sec-terms-and-definitions-prototype">ES6 文档<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<p>JS 中创建出来的对象都会有一个隐式引用，它指向的是构造器的<code>prototype</code>。这个隐式引用就是对象内部[[prototype]]，通常情况下我们是无法访问到这个属性的，但是可以通过浏览器实现的 <code>__proto__</code> 属性去访问它，每一个对象都会有一个<code>__proto__</code>属性。虽然可以通过<code>__proto__</code> 访问到[[prototype]]，但是ECMAScript 不建议通过<code>__proto__</code> 去修改内部[[prototype]] 属性，因为这是个影响性能的操作。</p>
+</li>
+<li><p><code>__proto__</code>指向哪里</p>
+<p><code>__proto__</code> 是一个引用而且指向constructor 的<code>prototype</code>。</p>
+</li>
+</ul>
+<img data-src="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/4675284-f8ff40ec92cab33a.png" class title="zhg" alt="src-http:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;4675284-f8ff40ec92cab33a.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1240">
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/08/09/JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/06/23/Windows%E4%B8%8Bbash%E6%89%BE%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/23/Windows%E4%B8%8Bbash%E6%89%BE%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B/" class="post-title-link" itemprop="url">Windows下bash找后台进程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-23 18:33:49" itemprop="dateCreated datePublished" datetime="2017-06-23T18:33:49+08:00">2017-06-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="windows-上bash-shell-怎么找后台进程"><a href="#windows-上bash-shell-怎么找后台进程" class="headerlink" title="windows 上bash shell 怎么找后台进程"></a>windows 上bash shell 怎么找后台进程</h1><p>今天一不小心关掉了bash shell， 发现生成本地静态服务器的后台进程没有关闭。然而<code>jobs</code> 和 <code>fg %1</code> 命令已经找不到进程，且我只记住了port，忘记了这个后台进程的PID，所以在网上google 了老半天解决方式，其中大多数命令是 Linux 系统或 Mac 系统才有，而Windows 系统上的bash shell 没有，比如下面两个命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ pgrep wget <span class="comment">#wget 指的应用程序名称</span></span><br><span class="line">1234</span><br><span class="line"></span><br><span class="line">$ lsof -wni tcp:3000</span><br><span class="line"></span><br><span class="line">$ fuser -k 3000/tcp</span><br></pre></td></tr></table></figure>
+
+<p>在试了众多命令之后，突然发现有一个命令会在bash shell 中产生乱码，而且其中某些命令参数是bash shell 没有的。</p>
+<p>输出如下图：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/06/23/Windows%E4%B8%8Bbash%E6%89%BE%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/06/17/%E5%86%92%E6%B3%A1%E5%92%8C%E6%8D%95%E8%8E%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/17/%E5%86%92%E6%B3%A1%E5%92%8C%E6%8D%95%E8%8E%B7/" class="post-title-link" itemprop="url">冒泡和捕获</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-17 10:36:18" itemprop="dateCreated datePublished" datetime="2017-06-17T10:36:18+08:00">2017-06-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>​    在浏览器中，事件的传播方式分为：事件冒泡和事件捕获。那么事件冒泡和事件捕获分别是什么？为什么会出现两种传播方式呢？带着这两个问题，我们开始今天的讨论。</p>
+<h3 id="一、前提"><a href="#一、前提" class="headerlink" title="一、前提"></a>一、前提</h3><ol>
+<li>在浏览器中用户点击鼠标，操作系统最先知道，浏览器次之。</li>
+<li>页面中子元素被点击了，意味着父元素也被点击。</li>
+<li>如果子元素和父元素同时监听了点击事件，那么点击子元素后，是子元素先知道，还是父元素先知道。而这个知道的前后顺序，就是由事件传播方式决定的。</li>
+</ol>
+<h3 id="二、冒泡模式和捕获模式"><a href="#二、冒泡模式和捕获模式" class="headerlink" title="二、冒泡模式和捕获模式"></a>二、冒泡模式和捕获模式</h3><p>​    <span class="exturl" data-url="aHR0cDovL3Bpai5yb2JpbnF1Lm1lL0Jyb3dzZXJfU2NyaXB0aW5nL0RPTV9TY3JpcHRpbmcvRXZlbnRBUEkuaHRtbA==" title="http://pij.robinqu.me/Browser_Scripting/DOM_Scripting/EventAPI.html">事件的传播途径是通过文档节点组成的有序列表。在DOM里面，这个事件传播路径的最后一点就是事件对象（Event Target）本身，其之前的元素就是事件对象的祖先元素<i class="fa fa-external-link"></i></span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/06/17/%E5%86%92%E6%B3%A1%E5%92%8C%E6%8D%95%E8%8E%B7/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/06/14/%E7%90%86%E8%A7%A3this-%E7%9A%84%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/14/%E7%90%86%E8%A7%A3this-%E7%9A%84%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">理解this 的用法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-14 23:05:21" itemprop="dateCreated datePublished" datetime="2017-06-14T23:05:21+08:00">2017-06-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="理解this-的用法"><a href="#理解this-的用法" class="headerlink" title="理解this 的用法"></a>理解this 的用法</h1><p>​    进入了JavaScript 学习，在函数和对象中会经常遇到this 关键字。虽然大多数情况下，可以猜测出this 是指向当前对象，但是遇到了某些例子，就会感到混乱，不明所以。如下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子一 </span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo1 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.x = <span class="number">10</span>); </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">foo2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.y = <span class="number">20</span>) </span><br><span class="line">  &#125;</span><br><span class="line">  foo2()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这样调用时this 分别指向什么？</span></span><br><span class="line">foo1()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这样调用时this 又分别指向什么？</span></span><br><span class="line">obj.method = foo1</span><br><span class="line">obj.method();</span><br></pre></td></tr></table></figure>
+
+<p>​    所以为减少上面这种迷糊时刻，接下来会对this 知识点进行梳理。</p>
+<h3 id="一、函数直接调用"><a href="#一、函数直接调用" class="headerlink" title="一、函数直接调用"></a>一、函数直接调用</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/06/14/%E7%90%86%E8%A7%A3this-%E7%9A%84%E7%94%A8%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/06/13/%E5%9C%A8JavaScript%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-%E8%BF%90%E7%AE%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/13/%E5%9C%A8JavaScript%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">在JavaScript中为什么推荐使用 === 运算符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-13 21:04:26" itemprop="dateCreated datePublished" datetime="2017-06-13T21:04:26+08:00">2017-06-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> 在JavaScript 中存在着三种等号运算符，分别为：= ；== ；=== 。一个等号的是<strong>赋值运算符</strong>， 两个等号的是<strong>相等运算符</strong>，三个等号的是<strong>严格相等运算符</strong>。后两者是今天讨论的主角，因为JavaScript 提供了两种相等运算符，那么我们在进行比较运算时，应该优先使用哪种相等运算符呢？为什么优先使用？为了解答这个问题，对于这两个运算符，我们要有一个大概的了解。</p>
+<h3 id="相等运算符（-）"><a href="#相等运算符（-）" class="headerlink" title="相等运算符（==）"></a>相等运算符（==）</h3><p>​    对于相等运算符，运算结果为布尔值（true 或者 false），相等时返回 <code>true</code>，不相等时返回 <code>false</code> 。但在比较运算时要注意比较的两者类型是否相同。比如比较的是x 和 y ： x == y </p>
+<ol>
+<li>当x 和 y 的数据类型相同时<ul>
+<li>如果x 和 y 都是基本数据类型（字符串、数值、undefined、null、boolean），当字面上的值相同，就返回true，否则返回 false。（比较的是值）</li>
+<li>NaN 与任何值比较都返回 false ，包括它自己。</li>
+<li>如果 x 和 y 都是复合数据类型，当 x 和 y 都是引用同一个对象，就返回true，否则返回 false。（比较的是地址）</li>
+</ul>
+</li>
+<li>当x 和 y 的数据类型不同时<ul>
+<li>如果 x 为 null， y 为 undefined，就返回 true，比较结束。</li>
+<li>如果 x 为 undefined，y  为 null，返回 true，比较结束。</li>
+<li>x 或 y 其中一个为 null 或 undefined，而另外一个是null 和undefined 之外的类型，就返回 false，比较结束。</li>
+<li>如果 x 为 Number 类型，<strong>y 为 String 类型</strong>，就先用Number() 函数将 <strong>y</strong> 转换为数值，再进行类型相同比较。</li>
+<li>如果 <strong>x 为 String 类型</strong>，y 为 Number 类型，就先用Number() 函数将 <strong>x</strong> 转换为数值，再进行类型相同比较。</li>
+<li>x 或 y 其中一个为Boolean 类型，就先用Number() 函数将 Boolean 转换为数值，然后进行后续比较。</li>
+<li>x 或 y 其中一个为Object 类型，就先调用 Object 的valueOf() 方法，如果返回的是基本数据类型 ，那么就回到前面几种情况的比较，否则调用Object 的toString() 方法，如果返回的是基本数据类型，那么就回到前面几种情况的比较，否则比较结束，结果为 false。</li>
+</ul>
+</li>
+</ol>
+<p>例子：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/06/13/%E5%9C%A8JavaScript%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-%E8%BF%90%E7%AE%97%E7%AC%A6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="微风玉米"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">微风玉米</p>
+  <div class="site-description" itemprop="description">一个来自编程行业的小学僧，还有很多知识需要学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RvZG9p" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;todoi"><i class="fa fa-fw fa-github"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmJlYXN0Zm9vZGllQDE2My5jb20=" title="E-Mail → mailto:beastfoodie@163.com"><i class="fa fa-fw fa-envelope"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a target="_blank" rel="noopener" href="//weibo.com/angan2io" title="Weibo → &#x2F;&#x2F;weibo.com&#x2F;angan2io"><i class="fa fa-fw fa-weibo"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy8=" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;">Next</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==" title="https:&#x2F;&#x2F;hexo.io&#x2F;">Hexo</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微风玉米</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+    </div>
+</body>
+</html>
