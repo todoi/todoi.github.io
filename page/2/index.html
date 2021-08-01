@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
@@ -195,6 +195,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
+    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/06/13/%E5%9C%A8JavaScript%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-%E8%BF%90%E7%AE%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="微风玉米">
+      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="angan2io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/06/13/%E5%9C%A8JavaScript%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">在JavaScript中为什么推荐使用 === 运算符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-06-13 21:04:26" itemprop="dateCreated datePublished" datetime="2017-06-13T21:04:26+08:00">2017-06-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> 在JavaScript 中存在着三种等号运算符，分别为：= ；== ；=== 。一个等号的是<strong>赋值运算符</strong>， 两个等号的是<strong>相等运算符</strong>，三个等号的是<strong>严格相等运算符</strong>。后两者是今天讨论的主角，因为JavaScript 提供了两种相等运算符，那么我们在进行比较运算时，应该优先使用哪种相等运算符呢？为什么优先使用？为了解答这个问题，对于这两个运算符，我们要有一个大概的了解。</p>
+<h3 id="相等运算符（-）"><a href="#相等运算符（-）" class="headerlink" title="相等运算符（==）"></a>相等运算符（==）</h3><p>​    对于相等运算符，运算结果为布尔值（true 或者 false），相等时返回 <code>true</code>，不相等时返回 <code>false</code> 。但在比较运算时要注意比较的两者类型是否相同。比如比较的是x 和 y ： x == y </p>
+<ol>
+<li>当x 和 y 的数据类型相同时<ul>
+<li>如果x 和 y 都是基本数据类型（字符串、数值、undefined、null、boolean），当字面上的值相同，就返回true，否则返回 false。（比较的是值）</li>
+<li>NaN 与任何值比较都返回 false ，包括它自己。</li>
+<li>如果 x 和 y 都是复合数据类型，当 x 和 y 都是引用同一个对象，就返回true，否则返回 false。（比较的是地址）</li>
+</ul>
+</li>
+<li>当x 和 y 的数据类型不同时<ul>
+<li>如果 x 为 null， y 为 undefined，就返回 true，比较结束。</li>
+<li>如果 x 为 undefined，y  为 null，返回 true，比较结束。</li>
+<li>x 或 y 其中一个为 null 或 undefined，而另外一个是null 和undefined 之外的类型，就返回 false，比较结束。</li>
+<li>如果 x 为 Number 类型，<strong>y 为 String 类型</strong>，就先用Number() 函数将 <strong>y</strong> 转换为数值，再进行类型相同比较。</li>
+<li>如果 <strong>x 为 String 类型</strong>，y 为 Number 类型，就先用Number() 函数将 <strong>x</strong> 转换为数值，再进行类型相同比较。</li>
+<li>x 或 y 其中一个为Boolean 类型，就先用Number() 函数将 Boolean 转换为数值，然后进行后续比较。</li>
+<li>x 或 y 其中一个为Object 类型，就先调用 Object 的valueOf() 方法，如果返回的是基本数据类型 ，那么就回到前面几种情况的比较，否则调用Object 的toString() 方法，如果返回的是基本数据类型，那么就回到前面几种情况的比较，否则比较结束，结果为 false。</li>
+</ul>
+</li>
+</ol>
+<p>例子：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/06/13/%E5%9C%A8JavaScript%E4%B8%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8-%E8%BF%90%E7%AE%97%E7%AC%A6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
     <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/05/27/html-meta/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -271,7 +365,7 @@
  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;content-security-policy&quot;</span> <span class="attr">content</span>=<span class="string">&quot;default-src https:&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>content-type</p>
-<p>该属性用于定义该文档的 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9NSU1F" title="https://developer.mozilla.org/en-US/docs/MIME">MIME type<i class="fa fa-external-link"></i></span> 。因为这是一个HTML 标签，所以许多HTTP <code>content-type</code> 的值写在这里是无效的。而有效的语法是一个字符串<code>&quot;text/html</code> 然后再跟一个<code>;charset=</code>*<code>IANAcharset&quot;</code>* 。如下面的例子：</p>
+<p>该属性用于定义该文档的 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9NSU1F" title="https://developer.mozilla.org/en-US/docs/MIME">MIME type<i class="fa fa-external-link"></i></span> 。因为这是一个HTML 标签，所以许多HTTP <code>content-type</code> 的值写在这里是无效的。而有效的语法是一个字符串<code>&quot;text/html</code> 然后再跟一个<code>;charset=</code><em><code>IANAcharset&quot;</code></em> 。如下面的例子：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;content-type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html;charset=utf-8&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>但是这个属性将要被废弃，用<code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> 代替它。</strong></p>
@@ -679,89 +773,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN,en,default">
-    <link itemprop="mainEntityOfPage" href="http://zhgzhg.me/2017/05/08/vim-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="微风玉米">
-      <meta itemprop="description" content="一个来自编程行业的小学僧，还有很多知识需要学习">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="angan2io">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/08/vim-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">vim 基本命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-05-08 21:13:11" itemprop="dateCreated datePublished" datetime="2017-05-08T21:13:11+08:00">2017-05-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vim/" itemprop="url" rel="index"><span itemprop="name">vim</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><span class="exturl" data-url="aHR0cDovL2JhaWtlLmJhaWR1LmNvbS9saW5rP3VybD1fWldxdmxybmIxdXc5MkpXQmZLdGFQaU5RS3lWQ1doUmRoTU9uM2hDXzVTS3V4eVBWMlFQRmdEd3I3alJnZFkxbmJLWXl5NzR4akV2TXI1YW9xN1ZHSw==" title="http://baike.baidu.com/link?url=_ZWqvlrnb1uw92JWBfKtaPiNQKyVCWhRdhMOn3hC_5SKuxyPV2QPFgDwr7jRgdY1nbKYyy74xjEvMr5aoq7VGK">vim<i class="fa fa-external-link"></i></span>是一个功能强大、高度可定制的文本编辑器</p>
-<h3 id="插入命令"><a href="#插入命令" class="headerlink" title="插入命令"></a>插入命令</h3><ul>
-<li>i 在当前位置前插入</li>
-<li>I 在当前位置行首插入</li>
-<li>a 在当前位置后插入</li>
-<li>A 在当前位置行尾插入</li>
-<li>o 在当前行之后插入一行</li>
-<li>O 在当前行之前插入一行</li>
-</ul>
-<h3 id="移动命令"><a href="#移动命令" class="headerlink" title="移动命令"></a>移动命令</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/08/vim-%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -833,7 +844,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -898,7 +909,7 @@
 <div class="copyright">
   
   &copy; 2017 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
